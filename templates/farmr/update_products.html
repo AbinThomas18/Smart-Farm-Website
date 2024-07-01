@@ -1,0 +1,105 @@
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Update Products</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Products</a></li>
+                        <li class="breadcrumb-item active">Update Product</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+          
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>Update Products</h3>
+                        </div>
+                        <form class="needs-validation" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Product Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" name="name" value="{{edit.name}}" >
+ 
+                                </div>
+                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Product Stock *</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="username" placeholder="" name="stock" value="{{edit.stock_in_kg}}">
+ 
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                
+                                <label for="country">Product Category *</label>
+                                <h4 class="mt-2 mb-2">{{edit.category}}</h4>
+                                <select class="wide w-100" id="country" name="category">
+                                    {% for i in category %}
+                                        <option value="{{i.name}}">{{i.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                
+                                <label for="email">Expiration Date *</label>
+                                <h4 class="mt-2 mb-2">{{edit.expiration_date}}</h4>
+                                <input type="date" class="form-control" id="email" placeholder="" name="expiry" value="{{edit.expiration_date}}">
+                       
+                            </div>
+                            <div class="mb-3">
+                                
+                                <label for="address">Product Image *</label><br>
+                                <img src="{{edit.imageURL_1}}" alt="" width="100px" height="100px" class="mt-2 mb-2">
+                                <input type="file" class="form-control" id="address" placeholder="" name= "img">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="address2">Product Price *</label>
+                                <input type="number" class="form-control" id="address2" placeholder=""  name="price" value="{{edit.price}}"> 
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address2">Product Description *</label><br><br>
+                                <textarea name="description" id="" cols="50" rows="5" class="">{{edit.description}}</textarea> 
+                            </div>
+                            
+                            <div class="custom-control custom-radio mb-4">
+                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" name="status" {% if edit.delivery_available %} checked {% endif %}>
+                                <label class="custom-control-label" for="debit">Delivery Available</label>
+                            </div>
+                            
+                            
+                            
+                            <button type="submit" class="mx-auto btn hvr-hover ">Update</button>
+                            
+                            
+                            
+                            </div>
+                            <hr class="mb-1"> </form>
+                    </div>
+                </div>
+                
+
+        </div>
+    </div>
+    <!-- End Cart -->
+{% endblock %}   
+    
+

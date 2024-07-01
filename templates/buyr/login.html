@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'login/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'login/login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&family=Poppins:wght@100;300;400;600&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6bf2dfa19e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="">
+            <h2 class="" style="text-align: center;margin-top: 10px;font-weight: 900;color: rgb(54, 5, 99);">Customer LogIn</h2>
+        </div>
+        {% for msg in messages %}
+            <h6 style="color: red; text-align: center;
+            padding-top: 11px;padding-bottom: 11px;border-radius: 10px;">{{msg}}</h6>
+        {% endfor %}
+        <form action="" method="POST">
+        {% csrf_token %}
+            <div class="user-box">
+                <input type="text" name="username" required>
+                <label >Username</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="password" required>
+                <label >Password</label>
+            </div>
+            <span>
+                
+                <button class="btn btn-primary btn-user btn-block mt-2" type="submit">SignIn</button>
+                
+            </span>
+            <!-- <a href="#">Forget password?</a> -->      
+        </form>
+        <div class="social mt-3">
+            <div class="heading">
+                <hr><h5><a href="{% url 'buyer_register' %}" style="text-decoration: none;color: rgb(54, 5, 99);">SignUp</a></h5><hr>
+            </div>
+            <div class="icons">
+                <div class="fa-brands fa-facebook"></div>
+                <div class="fa-brands fa-youtube"></div>
+                <div class="fa-brands fa-whatsapp"></div>
+                <div class="fa-brands fa-instagram"></div>
+            </div>
+        </div>    
+           
+        </div>
+        
+    </div>
+    
+    <!-- bootstrap js  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="{% static 'login/js/bootstrap.js' %}"></script>
+</body>
+</html>

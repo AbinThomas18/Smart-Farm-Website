@@ -1,0 +1,58 @@
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Categories</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Product</a></li>
+                        <li class="breadcrumb-item active">Categories</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Gallery  -->
+    <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Categories</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+            <div class="row special-list">
+                <div class="col-lg-3 col-md-6 col-sm-4 special-grid bulbs">
+                {% for i in view %}
+                    <div class="products-single">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">{{i.name}}</p>
+                            </div>
+                            <img src="{{i.imageURL}}" class="img-fluid" alt="Image">
+                            <div class="mask-icon">
+                               
+                                <!-- <a class="cart" href="#">Update</a> -->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}    
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+    <!-- End Gallery  -->
+{% endblock %}   
+

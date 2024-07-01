@@ -1,0 +1,99 @@
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}
+
+ <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Add Products</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Products</a></li>
+                        <li class="breadcrumb-item active">Add Products</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+          
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+                            <h3>Add Products</h3>
+                        </div>
+                        <form class="needs-validation" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">Product Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="" value="" name="name">
+ 
+                                </div>
+                                
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Product Stock *</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="username" placeholder="" name="stock">
+ 
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="country">Product Category *</label>
+                                <select class="wide w-100" id="country" name="category">
+                                {% for i in category %} 
+                                    <option value="{{i.name}}">{{i.name}}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email">Expiration Date *</label>
+                                <input type="date" class="form-control" id="email" placeholder="" name="expiry">
+                       
+                            </div>
+                            <div class="mb-3">
+                                <label for="address">Product Image *</label>
+                                <input type="file" class="form-control" id="address" placeholder="" name= "img">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="address2">Product Price *</label>
+                                <input type="number" class="form-control" id="address2" placeholder="" name="price"> 
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="address2">Product Description *</label><br><br>
+                                <textarea name="" id="" cols="50" rows="5" class="" name="description"></textarea> 
+                            </div>
+                            
+                            <div class="custom-control custom-radio mb-4">
+                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" name="status">
+                                <label class="custom-control-label" for="debit">Delivery Available</label>
+                            </div>
+                            
+                            
+                            
+                            <button type="submit" class="mx-auto btn hvr-hover ">Add</button>
+                            
+                            
+                            
+                            </div>
+                            <hr class="mb-1"> </form>
+                    </div>
+                </div>
+                
+
+        </div>
+    </div>
+    <!-- End Cart -->
+
+    
+{% endblock %}  

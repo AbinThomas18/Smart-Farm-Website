@@ -1,0 +1,155 @@
+{% extends 'buyr/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <!-- <a class="navbar-brand" href="index.html"><img src="{% static 'images/logo.png' %}" class="logo" alt=""></a> -->
+
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'buyer_home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">My Account</a>
+                            <ul class="dropdown-menu">
+								{% if user.is_authenticated %}
+                                    <li><a href="{% url 'add_buyer_details' %}">Add Profile</a></li>
+								    <li><a href="{% url 'view_buyer_detials' user.pk %}">View Profile</a></li>
+                                    <li><a href="{% url 'Signout' %}">SignOut</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'buyer_login' %}">LogIn</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{% url 'purchased_products' %}">Purchased Products</a></li>
+								
+                                <li><a href="{% url 'cart_view' %}">Cart</a></li>
+                                
+                            
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                        <li class="side-menu">
+							<a href="#">
+								<i class="fa fa-shopping-bag"></i>
+								<span class="badge">{{no_of_prd}}</span>
+								<p>My Cart</p>
+							</a>
+						</li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            <!-- Start Side Menu -->
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                {% if cart_items %}
+                <li class="cart-box">
+                 
+                    <ul class="cart-list">
+                    {% for item in cart_items %}
+                        <li>
+                            <a href="#" class="photo"><img src="{{item.product.imageURL_1}}" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">{{ item.product.name }} </a></h6>
+                            <p>{{ item.quantity }}<span class="price">{{ item.product.price }}</span></p>
+                        </li>
+                    {% endfor %}
+                        
+                        <li class="total">
+                            <a href="{% url 'cart_view' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: {{ total_price }}</span>
+                        </li>
+                    
+                    </ul>
+                    {% else %}
+                        <p>Your cart is empty.</p>
+                    {% endif %}
+                </li>
+            </div>
+            <!-- End Side Menu -->
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <form action="{% url 'search' %}" method="get">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" name="search" placeholder="Search">
+                    <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Top Search -->
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Product Detail</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Product</a></li>
+                        <li class="breadcrumb-item active">Product Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start About Page  -->
+    <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-fluid" src="{{view.imageURL_1}}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title-top"><span>{{view.name}}</span></h2>
+                    <p>{{view.description}}</p>
+                    <p>Category : {{view.category}}</p>
+                        <p>price :{{view.price}}</p>
+                        <p>stock :{{view.stock_in_kg}}</p>
+                    <p>Delivery Available : {{view.delivery_available}}</p>
+                    <p>Expiration date {{view.expiration_date}}</p>
+                    
+                    <a class="btn btn-success" href="{% url 'add_to_cart' view.id %}">Add to Cart</a>
+                    
+					
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- End About Page -->
+
+{% endblock %}   
+

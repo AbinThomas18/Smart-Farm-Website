@@ -1,0 +1,43 @@
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}    
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Rice Plant</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Nutrition</a></li>
+                        <li class="breadcrumb-item active">Deficiency</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Cart  -->
+    <br><br>
+    <div class="container divcen">
+        <h1>Nutrition Deficiency Report</h1>
+        <p>Predicted deficiency: <span style="color: red;">{{ predicted_deficiency }}</span></p>
+        <h2>Classification Report:</h2>
+        <pre>{{ classification_report }}</pre>
+
+        <!-- Display fertilizers based on predicted deficiency -->
+        <h2>Recommended Fertilizers:</h2>
+        {% if predicted_deficiency == "Nitrogen Deficiency" %}
+            <p>Use nitrogen-rich fertilizers such as urea or ammonium nitrate.</p>
+        {% elif predicted_deficiency == "Phosphorus Deficiency" %}
+            <p>Apply phosphorus-rich fertilizers like superphosphate or bone meal.</p>
+        {% elif predicted_deficiency == "Potassium Deficiency" %}
+            <p>Use potassium-rich fertilizers such as potassium chloride or potassium sulfate.</p>
+        {% else %}
+            <p>No specific recommendation for this deficiency.</p>
+        {% endif %}
+    </div>
+    <br><br>
+    <!-- End Instagram Feed  -->
+
+{% endblock %}

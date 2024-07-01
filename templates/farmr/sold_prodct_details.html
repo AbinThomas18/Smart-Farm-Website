@@ -1,0 +1,48 @@
+
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Product Detail</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Product</a></li>
+                        <li class="breadcrumb-item active">Product Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start About Page  -->
+    <div class="about-box-main">
+        <div class="container">
+            <div class="row">
+				<div class="col-lg-6">
+                    <div class="banner-frame"> <img class="img-fluid" src="{{ sold_product.product.imageURL_1 }}" alt="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="noo-sh-title-top"><span>{{ sold_product.product.name }}</span></h2>
+                        <p><strong>Buyer:</strong> {{ sold_product.user.username }}</p>
+                        <p><strong>Quantity:</strong> {{ sold_product.quantity }}</p>
+                    <p>{{ sold_product.product.description }}</p>
+                    <p><strong>Category :</strong>{{ sold_product.product.category }}</p>
+                        <p><strong>price :</strong>{{view.price}}{{ sold_product.product.price }}</p>
+              
+                    <p><strong>Expiration date :</strong>{{ sold_product.product.expiration_date }}</p>
+					
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- End About Page -->
+
+{% endblock %}   
+

@@ -1,0 +1,366 @@
+{% extends 'buyr/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <!-- <a class="navbar-brand" href="index.html"><img src="{% static 'images/logo.png' %}" class="logo" alt=""></a> -->
+
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'buyer_home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">My Account</a>
+                            <ul class="dropdown-menu">
+                                {% if user.is_authenticated %}
+                                    <li><a href="{% url 'add_buyer_details' %}">Add Profile</a></li>
+								    <li><a href="{% url 'view_buyer_detials' user.pk %}">View Profile</a></li>
+                                    <li><a href="{% url 'Signout' %}">SignOut</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'buyer_login' %}">LogIn</a></li>
+                                {% endif %}
+
+								
+                                
+                                
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{% url 'purchased_products' %}">Purchased Products</a></li>
+								
+                                <li><a href="{% url 'cart_view' %}">Cart</a></li>
+                                
+                            
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Gallery</a></li>
+                        {% comment %} <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li> {% endcomment %}
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Farmer</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{% url 'farm_login' %}">LogIn</a></li>
+								
+                                <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                                
+                            
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                    {% if user.is_authenticated %}
+                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                        <li class="side-menu">
+							<a href="#">
+								<i class="fa fa-shopping-bag"></i>
+								<span class="badge">{{no_of_prd}}</span>
+								<p>My Cart</p>
+							</a>
+						</li>
+                    {% else %}
+                        <li class="side-menu">
+							<a href="#">
+								<i class="fa fa-shopping-bag"></i>
+								<span class="badge"></span>
+								<p>My Cart</p>
+							</a>
+						</li>
+                    {% endif %}
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            <!-- Start Side Menu -->
+            {% if user.is_authenticated %}
+            <div class="side">
+                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                {% if cart_items %}
+                <li class="cart-box">
+                 
+                    <ul class="cart-list">
+                    {% for item in cart_items %}
+                        <li>
+                            <a href="#" class="photo"><img src="{{item.product.imageURL_1}}" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">{{ item.product.name }} </a></h6>
+                            <p>{{ item.quantity }}<span class="price">{{ item.product.price }}</span></p>
+                        </li>
+                    {% endfor %}
+                        
+                        <li class="total">
+                            <a href="{% url 'cart_view' %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <span class="float-right"><strong>Total</strong>: {{ total_price }}</span>
+                        </li>
+                    
+                    </ul>
+                    {% else %}
+                        <p>Your cart is empty.</p>
+                    {% endif %}
+                </li>
+            </div>
+            {% endif %}
+            <!-- End Side Menu -->
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <form action="{% url 'search' %}" method="get">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" name="search" placeholder="Search">
+                    <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Top Search -->
+
+    <!-- Start Slider -->
+    <div id="slides-shop" class="cover-slides">
+        <ul class="slides-container">
+            <li class="text-center">
+                <img src="{% static 'images/banner-01.jpg' %}" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> Smart Farm</strong></h1>
+                            <p class="m-b-40">
+<br>
+</p>
+                            <p>
+</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="text-center">
+                <img src="{% static 'images/banner-02.jpg' %}" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> Smart Farm</strong></h1>
+                            <p class="m-b-40">
+<br>
+</p>
+                            <p>
+</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="text-center">
+                <img src="{% static 'images/banner-03.jpg' %}" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="m-b-20"><strong>Welcome To <br> Smart Farm</strong></h1>
+                            <p class="m-b-40">
+<br>
+</p>
+                            <p>
+</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="slides-navigation">
+            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <!-- End Slider -->
+
+    <!-- Start Categories  -->
+    <div class="categories-shop">
+        <div class="container">
+            <div class="row">
+            {% for i in cate %}
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-6">
+                    <div class="shop-cat-box">
+                        <img class="img-fluid" src="{{i.imageURL}}" alt="" style="height: 200px;" />
+                        <a class="btn hvr-hover" href="{% url 'view_category' i.pk %}">{{i.name}}</a>
+                    </div>
+                </div>
+            {% endfor %}   
+            </div>
+        </div>
+    </div>
+    <!-- End Categories -->
+	
+	<div class="box-add-products">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer-box-products">
+						<img class="img-fluid" src="{% static 'images/add-img-01.jpg' %}" alt="" />
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12">
+					<div class="offer-box-products">
+						<img class="img-fluid" src="{% static 'images/add-img-02.jpg' %}" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- Start Products  -->
+    <div class="products-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title-all text-center">
+                        <h1>Fruits & Vegetables</h1>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="row special-list">
+            {% for i in view %}
+                <div class="col-lg-3 col-md-6 special-grid best-seller col-6">
+                
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+                                <p class="sale">{{i.expiration_date}}</p>
+                            </div>
+                            <img src="{{i.imageURL_1}}" class="img-fluid" alt="Image" style="height: 250px;">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="{% url 'view_all_product' i.pk %}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+
+                                </ul>
+                                <a class="cart" href="{% url 'add_to_cart' i.id %}">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>{{i.name}}</h4>
+                            <h5> {{i.price}}</h5>
+                        </div>
+                    </div>
+                
+                </div>
+                {% endfor %}
+
+                
+            </div>
+        </div>
+    </div>
+    <!-- End Products  -->
+
+    
+
+
+    <!-- Start Instagram Feed  -->
+    <div class="instagram-box">
+        <div class="main-instagram owl-carousel owl-theme">
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-01.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-02.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-03.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-04.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-06.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-07.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-08.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-09.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ins-inner-box">
+                    <img src="{% static 'images/instagram-img-05.jpg' %}" alt="" />
+                    <div class="hov-in">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Instagram Feed  -->
+
+
+{% endblock %}

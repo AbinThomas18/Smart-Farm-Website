@@ -1,0 +1,74 @@
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    
+                    <h2>Category</h2>
+                
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Product</a></li>
+                        <li class="breadcrumb-item active">Category</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Shop Page  -->
+    <div class="shop-box-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                    <div class="right-product-box">
+                        
+
+                        <div class="product-categorie-box">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                    <div class="row">
+                                    {% for i in view %}
+                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                            <div class="products-single fix">
+                                                <div class="box-img-hover">
+                                                    <div class="type-lb">
+                                                        <p class="sale">{{i.expiration_date}}</p>
+                                                    </div>
+                                                    <img src="{{i.imageURL_1}}" class="" alt="Image"  width="150px" height="150px">
+                                                    <div class="mask-icon">
+                                                        <ul>
+                                                            <li><a href="{% url 'view_all_product' i.pk %}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+     
+     
+                                                        </ul>
+                                                        <a class="cart btn" href="">add to cart</a>
+                                                    </div>
+                                                </div>
+                                                <div class="why-text">
+                                                    <h4>{{i.name}}</h4>
+                                                    <h5> {{i.price}}</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}    
+                                       
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+            </div>
+        </div>
+    </div>
+    <!-- End Shop Page -->
+{% endblock %}   
+  

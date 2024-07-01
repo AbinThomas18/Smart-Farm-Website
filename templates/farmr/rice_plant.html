@@ -1,0 +1,67 @@
+{% extends 'farmr/base.html' %}
+{% load static %}
+{% block content %}
+ <!-- Start All Title Box -->
+ <div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Rice Plant</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Nutrition</a></li>
+                    <li class="breadcrumb-item active">Deficiency</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+    <!-- Start Cart  -->
+    <br><br>
+    <div class="container mt-5">
+        <h1 class="text-center">Upload an Image</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="imageInput" class="form-label">Choose an image</label>
+                        <input type="file" class="form-control" id="imageInput" name="image" accept=".jpg, .jpeg, .png" required>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Upload Image">
+                </form>
+                {% if predicted_symptom %}
+    <h1 class="text-center mt-4">Nutrition Deficiency</h1>
+    <h2 style="margin-top: 15px;">Predicted deficiency: <span style="color: red;">{{ predicted_symptom }}</span></h2>
+    
+    <!-- Display recommended fertilizers based on predicted deficiency -->
+    <h2>Recommended Fertilizers:</h2>
+    {% if predicted_symptom == "Nitrogen(N)" %}
+        <p><b>Fertilizer Name:</b> Urea<br>
+        <b>Dosage:</b> Typically, nitrogen deficiency is addressed by applying urea at different growth stages of the rice crop. The dosage varies depending on factors such as soil fertility, crop stage, and variety. As a general guideline, urea can be applied in split doses:<br>
+        <b>Basal Application:</b> 50-60 kg/ha at the time of land preparation or basal fertilization.<br>
+        <b>Top Dressing:</b> 2-3 split doses of 25-30 kg/ha each at 20-30 days after transplanting (DAT), 40-50 DAT, and 70-80 DAT.</p>
+    {% elif predicted_symptom == "Phosphorus(P)" %}
+        <p><b>Fertilizer Name:</b> Single Super Phosphate (SSP) or Diammonium Phosphate (DAP)<br>
+        <b>Dosage:</b> Phosphorus deficiency can be addressed by applying phosphatic fertilizers such as SSP or DAP. The dosage depends on soil test results and crop requirements. As a general guideline:<br>
+        <b>Basal Application:</b> Apply 50-60 kg/ha of SSP or DAP at the time of land preparation or basal fertilization.</p>
+    {% elif predicted_symptom == "Potassium(K)" %}
+        <p><b>Fertilizer Name:</b> Muriate of Potash (MOP) or Sulphate of Potash (SOP)<br>
+        <b>Dosage:</b> Potassium deficiency can be corrected by applying potassic fertilizers such as MOP or SOP. The dosage varies depending on soil test results and crop requirements. As a general guideline:<br>
+        <b>Basal Application:</b> Apply 30-40 kg/ha of MOP or SOP at the time of land preparation or basal fertilization.</p>
+    {% else %} 
+        <p>No specific recommendation for this deficiency.</p>
+    {% endif %}
+{% endif %}
+
+               
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <br><br>
+    <!-- End Instagram Feed  -->
+
+{% endblock %}

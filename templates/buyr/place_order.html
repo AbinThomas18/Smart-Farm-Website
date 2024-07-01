@@ -1,0 +1,39 @@
+
+{% extends 'buyr/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Order Successfully Completed</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Order</a></li>
+                        <li class="breadcrumb-item active"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h4 style="margin-top: 30px;">
+            <pre>
+            Hi {{request.user.name}},
+
+                    Your order is all set and en route to you! 🚚 Our farmer is super excited to
+                    deliver your fresh products. You can expect them at your doorstep soon.
+              
+            </pre>
+        </h4>
+        
+
+    </div>
+    <!-- End All Title Box -->
+    <div style="margin-bottom: 300px;margin-top: 60px;margin-left: 60px;"><a class="btn btn-success" href="{% url 'buyer_home' %}">Back To Home</a></div>
+
+    
+
+{% endblock %}   
+
